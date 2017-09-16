@@ -12,7 +12,7 @@ router.get('/story/:id', (req,res) =>{
 });
 
 router.get('/potties/:id', (req, res) => {
-    const id = parseInt(req.params.id,10);
+    const id = req.params.id;
     if(!id) {
         return res.status(400).json({error:'Incorrect id'});
     } //user id
