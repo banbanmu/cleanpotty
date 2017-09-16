@@ -5,7 +5,6 @@ const router = express.Router();
 
 router.post('/signup', (req, res) => {
     let { email, name, hash, password } = req.body;
-    let emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/;
     User.findOne({ email }, (err, exist) => {
         if (err) throw err;
         if (exist) {
@@ -14,12 +13,7 @@ router.post('/signup', (req, res) => {
                 code: 0
             });
         };
-        if (!emailRegex.test(email)) {
-            return res.status(400).json({
-                error: "INVALID_EMAIL",
-                code: 1
-            });
-        };  
+
         let user = new User({ email, name, hash });
         user.password = user.generateHash(password);
         user.save((err) => {

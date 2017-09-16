@@ -7,11 +7,11 @@ router.get('/story/:id', (req,res) =>{
     let id = req.params.id;
     Poop.find({ user: id }, (err, poops) => {
         if (err) throw err;
-        return res.json()
+        return res.json({ data: poops });
     });
 });
 
-router.get('/potties/:id', (req, res) => {
+router.get('/:id', (req, res) => {
     const id = req.params.id;
     if(!id) {
         return res.status(400).json({error:'Incorrect id'});

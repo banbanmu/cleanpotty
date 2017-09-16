@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const pottySchma = new Schema({
-    timeCleaned: Date,
+    timeCleaned: { type: Date, default: Date.now },
     location: [ Number ]
 });
 

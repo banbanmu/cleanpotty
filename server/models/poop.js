@@ -6,7 +6,8 @@ const poopSchma = new Schema({
     user: { type: Schema.Types.ObjectId, ref: 'User' },
     potty: { type: Schema.Types.ObjectId, ref: 'Potty' },
     timeSpent: Number,
-    type: String,
+    type: Number,
+    time: { type: Date, default: Date.now }
 });
 
 export default mongoose.model('Poop', poopSchma);
