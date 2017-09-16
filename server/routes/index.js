@@ -1,11 +1,8 @@
 import express from 'express';
-/* import Your api
-import A from './A';
-import B from './B';
-*/
+import user from './user';
+
 const router = express.Router();
-/* use your api
-router.use('/A', A);
-router.use('/B', B);
-*/
+
+router.use('/user', user);
+
 export default router;
