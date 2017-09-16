@@ -9,16 +9,18 @@ router.post('/', (req, res) => {
         if (err) throw err;
         if (!user) {
             return res.status(400).json({
-                error: "USER_NOT_EXIST",
-                code: 0
+                //error: "USER_NOT_EXIST",
+                code: "0",
+                data: null
             });
         };
         Potty.findById(potty_id, (err, potty) => {
             if (err) throw err;
             if (!potty) {
                 return res.status(400).json({
-                    error: "POTTY_NOT_EXIST",
-                    code: 1
+                    //error: "POTTY_NOT_EXIST",
+                    code: "1",
+                    data: null
                 });
             };
             let poop = new Poop({ timeSpent, type });
@@ -26,7 +28,10 @@ router.post('/', (req, res) => {
             poop.user = user._id;
             poop.save(err => {
                 if (err) throw err;
-                return res.json({ success: true });
+                return res.json({ 
+                    code: "success",
+                    data: null,
+                });
             });
         });
     });

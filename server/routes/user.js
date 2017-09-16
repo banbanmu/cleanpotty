@@ -10,7 +10,8 @@ router.post('/signup', (req, res) => {
         if (exist) {
             return res.status(400).json({
                 error: "ALREADY_EXIST",
-                code: 0
+                code: "0",
+                data: null
             });
         };
 
@@ -18,7 +19,11 @@ router.post('/signup', (req, res) => {
         user.password = user.generateHash(password);
         user.save((err) => {
             if (err) throw err;
-            return res.json({ success: true });
+            return res.json({ 
+                code: "success", 
+                data: null,
+                error: null
+            });
         });
     });
 });
@@ -29,21 +34,26 @@ router.post('/signin', (req, res) => {
         if (err) throw err;
         if (!user) {
             return res.status(400).json({
-                error: "LOGIN_FAILED",
-                code: 0
+                //error: "LOGIN_FAILED",
+                code: "0",
+                data: null
             });
         };
         if (!user.validateHash(password)) {
             return res.status(400).json({
-                error: "LOGIN_FAILED",
-                code: 0
+                //error: "LOGIN_FAILED",
+                code: "0",
+                data: null
             });
         };
         req.session.userInfo = {
             _id: user._id,
             email: user.email
         };
-        return res.json({ success: true });
+        return res.json({ 
+            code: "success",
+            data: null,
+        });
     });
 });
 
