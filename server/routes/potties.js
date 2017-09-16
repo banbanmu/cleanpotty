@@ -34,4 +34,13 @@ router.get('/:id', (req, res) => {
     });
 });
 
+router.post('/', (req, res) => {
+    let { lat, lng } = req.body;
+    let potty = new Potty({ lng, lat });
+    potty.save(err => {
+        if (err) throw err;
+        return res.json({success: true});
+    });
+});
+
 export default router;
