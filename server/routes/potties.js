@@ -3,6 +3,14 @@ import {User,Poop,Potty} from '../models';
 
 const router = express.Router();
 
+router.get('/story/:id', (req,res) =>{
+    let id = req.params.id;
+    Poop.find({ user: id }, (err, poops) => {
+        if (err) throw err;
+        return res.json()
+    });
+});
+
 router.get('/potties/:id', (req, res) => {
     const id = parseInt(req.params.id,10);
     if(!id) {
@@ -16,8 +24,7 @@ router.get('/potties/:id', (req, res) => {
         let pottiesArr = Array.from(pottiesSet)
         Potty.find({'_id':{$in:pottiesArr}},(err,potties)=>{
             return res.json({ data: potties });
-            }
-        )
+        });
     });
 });
 
